@@ -1,0 +1,49 @@
+INSIGHT 
+
+1: Rail Has the Highest Average Usage
+•	Among all service types, Rail consistently records the highest average number of daily journeys.
+•	This indicates it is the most utilized mode of public transport, likely due to fixed routes and reliability.
+2: Peak Usage Happens on Weekdays
+•	Public transport usage is significantly higher on weekdays, especially for:
+1.	Peak Service
+2.	Local Route
+3.	Rapid Route
+•	Weekend usage noticeably drops, suggesting commuter-driven demand.
+3: School Transport Has Sharp Peaks and Troughs
+•	School services show highly irregular patterns:
+1.	Sharp spikes during school terms
+2.	Very low or zero usage during holidays
+•	This pattern reflects academic calendars and can aid in term-time planning.
+4: Overall Demand Has Seasonal Trends and Spikes
+•	The overall number of journeys shows a seasonal pattern:
+1.	Certain months (likely tied to weather or events) show higher public transport usage.
+2.	Random daily spikes suggest special events or transit promotions.
+
+Technical Report: Additive Time Series Forecasting using Facebook Prophet
+Objective
+Forecast the daily passenger journeys for the next 7 days for five types of public transport services:
+•	Local Route
+•	Light Rail
+•	Peak Service
+•	Rapid Route
+•	School
+
+Chosen Algorithm: Additive Time Series Model (via Facebook Prophet)
+Facebook Prophet is an open-source time series forecasting library developed by Meta. It implements an additive model with components for trend, seasonality, and holiday effects:
+Why Prophet?
+Prophet is ideal for time series that:
+•	Have strong seasonal patterns (e.g., weekdays vs weekends)
+•	Require quick deployment and interpretability
+•	Contain missing data or outliers
+•	Are daily or hourly in frequency
+These conditions match our dataset perfectly
+Model Parameters Used
+Parameter	Description
+trend	Automatically detected, linear by default
+seasonality_mode	'additive' (suitable when seasonal effects are constant over time)
+changepoint_prior_scale	0.05 (default) – controls flexibility of trend changes
+forecast horizon	7 days
+Results Summary
+•	Separate models were trained for each service type using historical daily journey counts.
+•	All services showed distinct weekly seasonality, especially Peak and School services.
+•	Light Rail and Rapid Route exhibited stable trends; School service was highly periodic (reflecting school terms).
